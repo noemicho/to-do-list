@@ -26,7 +26,8 @@ function App() {
           <button className='button-enter' >add</button>
       </div>
       <div className='container'>
-          <Task></Task>
+        <Task></Task>
+        <Task></Task>
       </div>
     </div>
   )

@@ -1,0 +1,16 @@
+.task-p{
+    border: 1px solid rgb(203, 198, 198);
+    resize: none;
+    text-align: center;
+    
+    max-height: 20px;
+    width: 300px;
+    overflow: hidden;
+    padding: 5px;
+    
+}
+
+.Task{
+    display: flex;
+    padding-top: 10px;
+}
