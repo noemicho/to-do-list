@@ -1,3 +1,4 @@
+import { response } from "express"
 import TaskSchema from "../models/TaskSchema.js"
 
 async function create(request, response){
@@ -28,7 +29,21 @@ async function deleteTask(request, response){
     if(taskDeleted){
         return response.json(taskDeleted)
     }
-    return response.status(401).json({error: "couldn't find this id"})
+    return response.status(401).json({error: "couldn't find this id to delete"})
 }
 
-export default {create, read, deleteTask}
+async function updateTask(request, response){
+    const {id} = request.params
+    const {name} = request.body
+
+    const task = await TaskSchema.findOne({_id: id})
+
+    if(task.name){
+        task.name = name
+        await task.save()
+    }
+    return response.json(task)
+    
+}
+
+export default {create, read, deleteTask, updateTask}

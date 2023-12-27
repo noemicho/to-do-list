@@ -8,5 +8,6 @@ const routes = express.Router()
 routes.post('/tasks', TaskController.create)
 routes.get('/tasks', TaskController.read)
 routes.delete('/tasks/:id', TaskController.deleteTask)
+routes.patch('/tasks/:id', TaskController.updateTask)
 
 export default routes
