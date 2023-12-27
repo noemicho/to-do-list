@@ -7,5 +7,6 @@ const routes = express.Router()
 //Task Routes
 routes.post('/tasks', TaskController.create)
 routes.get('/tasks', TaskController.read)
+routes.delete('/tasks/:id', TaskController.deleteTask)
 
 export default routes

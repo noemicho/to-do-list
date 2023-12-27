@@ -20,5 +20,15 @@ async function read(request, response) {
     return response.json(taskList)
 } 
 
+async function deleteTask(request, response){
+    const {id} = request.params
+   
+    const taskDeleted = await TaskSchema.findOneAndDelete({_id: id})
 
-export default {create, read}
+    if(taskDeleted){
+        return response.json(taskDeleted)
+    }
+    return response.status(401).json({error: "couldn't find this id"})
+}
+
+export default {create, read, deleteTask}
