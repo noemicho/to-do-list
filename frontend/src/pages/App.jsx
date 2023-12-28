@@ -4,12 +4,32 @@ import '../styles/App.css'
 
 import Task from '../components/Task.jsx'
 
-import { useState,useEffect } from 'react'
+import api from '../api.js'
+
+import { useState, useEffect } from 'react'
 
 function App() {
 
   const [task, setTask] = useState('')
+  const [allTasks, setAllTasks] = useState([])
 
+  useEffect(() => {
+    async function getAllTasks(){
+      const response = []
+      try{
+        response = await api.get('/tasks')
+      }
+      catch(error) {
+
+        console.log(JSON.stringify(error))
+      }
+      setTask(response.data)
+  }
+  getAllTasks()
+
+  }, [])
+
+ 
   return (
     <div className="App">
       <header className="App-header">
@@ -26,8 +46,7 @@ function App() {
           <button className='button-enter' >add</button>
       </div>
       <div className='container'>
-        <Task></Task>
-        <Task></Task>
+         {allTasks.map(data =>(<Task key={data._id} data={data}/>))}
       </div>
     </div>
   )
