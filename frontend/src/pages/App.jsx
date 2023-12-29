@@ -10,7 +10,7 @@ import { useState, useEffect } from 'react'
 
 function App() {
 
-  const [task, setTask] = useState('')
+  const [name, setName] = useState('')
   const [allTasks, setAllTasks] = useState([])
 
   useEffect(() => {
@@ -28,15 +28,23 @@ function App() {
   async function handleButtonAdd(event){
     event.preventDefault()
 
-    try{
-      const response = await api.post('/tasks', {
-        task
-      })
-      console.log('task added')
+    if(name){
+      try{
+        const response = await api.post('/tasks', {
+          name
+        })
+        
+        window.location.reload()
+        console.log('task added')
+      }
+      catch (error) {
+        console.error("error adding task: ", error);
+        console.log('error adding task')
+      }
+    }else if(name == ''){
+      console.log('enter a task')
     }
-    catch (error) {
-      console.error("error adding task: ", error);
-    }
+   
 
   }
  
@@ -50,8 +58,8 @@ function App() {
             className='input-enter' 
             type='text' 
             placeholder='write your task'
-            value={task}
-            onChange={(event) => {setTask(event.target.value)}}
+            value={name}
+            onChange={(event) => {setName(event.target.value)}}
             />
           <button onClick={handleButtonAdd} className='button-enter' >add</button>
       </div>
