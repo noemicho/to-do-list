@@ -15,17 +15,30 @@ function App() {
 
   useEffect(() => {
     async function getAllTasks(){
-      const response = []
-    
-      response = await api.get('/tasks')
+  
+      const response = await api.get('/tasks') 
       
      
-      setTask(response.data)
+      setAllTasks(response.data)
   }
   getAllTasks()
 
   }, [])
 
+  async function handleButtonAdd(event){
+    event.preventDefault()
+
+    try{
+      const response = await api.post('/tasks', {
+        task
+      })
+      console.log('task added')
+    }
+    catch (error) {
+      console.error("error adding task: ", error);
+    }
+
+  }
  
   return (
     <div className="App">
@@ -40,7 +53,7 @@ function App() {
             value={task}
             onChange={(event) => {setTask(event.target.value)}}
             />
-          <button className='button-enter' >add</button>
+          <button onClick={handleButtonAdd} className='button-enter' >add</button>
       </div>
       <div className='container'>
          {allTasks.map(data =>(
