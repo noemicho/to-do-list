@@ -16,13 +16,10 @@ function App() {
   useEffect(() => {
     async function getAllTasks(){
       const response = []
-      try{
-        response = await api.get('/tasks')
-      }
-      catch(error) {
-
-        console.log(JSON.stringify(error))
-      }
+    
+      response = await api.get('/tasks')
+      
+     
       setTask(response.data)
   }
   getAllTasks()
@@ -46,7 +43,9 @@ function App() {
           <button className='button-enter' >add</button>
       </div>
       <div className='container'>
-         {allTasks.map(data =>(<Task key={data._id} data={data}/>))}
+         {allTasks.map(data =>(
+            <Task key={data._id} data={data}/>
+         ))}
       </div>
     </div>
   )
