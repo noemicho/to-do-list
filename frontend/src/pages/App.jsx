@@ -34,11 +34,14 @@ function App() {
           name
         })
         
-        window.location.reload()
+        setInterval(function() {
+          window.location.reload()
+        }, 10)
+      
         console.log('task added')
       }
       catch (error) {
-        console.error("error adding task: ", error);
+        console.error("error adding task: ", error)
         console.log('error adding task')
       }
     }else if(name == ''){
